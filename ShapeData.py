@@ -9,13 +9,6 @@ import torch.nn.functional as F
 import torchvision as tv
 from sklearn.model_selection import train_test_split
 
-
-#Kaggle image dataset containing around 3700 images per shapre group being circles squares stars and triangles
-dataset = ShapeDataset('archive (4)/shapes')
-train_dataset, valid_dataset = train_test_split(dataset, train_size=0.7, test_size=0.3) #splitting kaggle dataset into the training ang test sets since it did not come inherently in the dataset
-train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True)
-valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=64)
-
 #Medium shape classifier: https://studentsxstudents.com/creating-a-shape-classification-cnn-model-using-pytorch-2cce61077834
 class ShapeDataset(torch.utils.data.Dataset):
     def __init__(self, img_dir):
@@ -50,3 +43,10 @@ class ShapeDataset(torch.utils.data.Dataset):
         image = tv.io.read_image(img_path)
         image = self.transform(image)
         return image, label
+
+#Kaggle image dataset containing around 3700 images per shapre group being circles squares stars and triangles
+dataset = ShapeDataset('archive (4)/shapes')
+train_dataset, valid_dataset = train_test_split(dataset, train_size=0.7, test_size=0.3) #splitting kaggle dataset into the training ang test sets since it did not come inherently in the dataset
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=64)
+

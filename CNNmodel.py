@@ -6,8 +6,6 @@ class ConvNet(nn.Module):
         super().__init__()
             
             #output size after convolution filter
-            #((w-f+2P)/s) +1
-
             #Input shape= (64,3,200,200)
 
         self.conv1 = nn.Conv2d(in_channels=1,out_channels=12, kernel_size=3,stride=1,padding=1)
@@ -25,13 +23,16 @@ class ConvNet(nn.Module):
 
         self.conv2=nn.Conv2d(in_channels=12,out_channels=20, kernel_size=3,stride=1,padding=1)
             #shape= (64,20,100,100)
+
         self.relu2 = nn.ReLU()
             #shape= (64,20,100,100)
 
         self.conv3=nn.Conv2d(in_channels=20,out_channels=32, kernel_size=3,stride=1,padding=1)
             #shape= (64,32,100,100)
+
         self.bn3=nn.BatchNorm2d(num_features=32)
             #shape= (64,32,100,100)
+
         self.relu3 = nn.ReLU()
             #shape= (64,32,100,100)
 

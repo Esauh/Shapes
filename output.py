@@ -21,4 +21,4 @@ for x, y in valid_loader:
     avg_loss += loss.item()
 avg_loss /= len(valid_loader)
 
-print("VALIDATION LOSS IS " + avg_loss)
+print("VALIDATION LOSS IS " + str(avg_loss))
