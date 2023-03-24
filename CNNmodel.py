@@ -36,7 +36,7 @@ class ConvNet(nn.Module):
         self.relu3 = nn.ReLU()
             #shape= (64,32,100,100)
 
-        self.fc = nn.Linear(in_features=32*100*100, out_features=4)
+        self.fc = nn.Linear(in_features=32*100*100, out_features=2)
 
             #feed forward function
 
@@ -62,24 +62,3 @@ class ConvNet(nn.Module):
 
         return output
     
-    def forward(self,input):
-        output=self.conv1(input)
-        output=self.bn1(output)
-        output=self.relu1(output)
-
-        output=self.pool(output)
-        
-        output=self.conv2(output)
-        output=self.relu2(output)
-
-        output=self.conv3(output)
-        output=self.bn3(output)
-        output=self.relu3(output)
-
-        #above output will be in matrix form, with shape of (64,32,100,100)
-
-        output=output.view(-1,32*100*100)
-
-        output=self.fc(output)
-
-        return output
