@@ -28,7 +28,7 @@ class ShapeDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx):
         label = self.annotation[idx]
         if label.eq(torch.tensor([1, 0], dtype=torch.int64)).all():
-            img_path = os.path.join(self.img_dir, 'non-sqaure', f"{idx}.png")
+            img_path = os.path.join(self.img_dir, 'non-square', f"{idx}.png")
 
         elif label.eq(torch.tensor([0, 1], dtype=torch.int64)).all():
             img_path = os.path.join(self.img_dir, 'square', f"{idx - 3720}.png")
