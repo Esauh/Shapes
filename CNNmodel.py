@@ -8,7 +8,7 @@ class ConvNet(nn.Module):
             #output size after convolution filter
             #Input shape= (64,3,200,200)
 
-        self.conv1 = nn.Conv2d(in_channels=1,out_channels=12, kernel_size=3,stride=1,padding=1)
+        self.conv1 = nn.Conv2d(in_channels=3,out_channels=12, kernel_size=3,stride=1,padding=1)
             #shape= (64,12,200,200)
 
         self.bn1 = nn.BatchNorm2d(num_features=12)
@@ -37,7 +37,6 @@ class ConvNet(nn.Module):
             #shape= (64,32,100,100)
 
         self.fc = nn.Linear(in_features=32*100*100, out_features=2)
-
             #feed forward function
 
     def forward(self,input):
