@@ -36,9 +36,9 @@ class ShapeDataset(torch.utils.data.Dataset):
         image = self.transform(image)
         return image, label
 
-#Kaggle image dataset containing around 3700 images per shape group being circles squares stars and triangles created a new folder called non squares which cureently only holds circle images to make processes run faster
+#New dataset created from createshapes method utilizing only 140 images as of now looking at squares vs the arrangement of other non square shapes" 
 dataset = ShapeDataset('archive (4)/shapes')
-train_dataset, valid_dataset = train_test_split(dataset, train_size=0.7, test_size=0.3) #splitting kaggle dataset into the training ang test sets since it did not come inherently in the dataset
+train_dataset, valid_dataset = train_test_split(dataset, train_size=0.7, test_size=0.3) #splitting dataset into the training ang test sets since it did not come inherently in the dataset
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=64, shuffle=True)
 valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=64)
 
