@@ -3,9 +3,17 @@ from tqdm import tqdm
 import torch
 from ShapeData import train_loader, valid_loader
 
-model = ConvNet()
+#TODO: save model using torch 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+model = ConvNet().to(device)
 criterion = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+PATH ='model.pth'
+torch.save(model.state_dict(), PATH)
+
+#To Load dataset utilize this
+#model.load_state_dict(torch.load(PATH))
 
 def LossValidation():
     for x, y in tqdm(train_loader):

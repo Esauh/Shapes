@@ -1,14 +1,13 @@
 import torch.nn as nn
-
 class ConvNet(nn.Module):
     def __init__(self,num_classes=4):
 
         super().__init__()
             
             #output size after convolution filter
-            #Input shape= (64,3,200,200)
+            #Input shape= (64,1,200,200)
 
-        self.conv1 = nn.Conv2d(in_channels=3,out_channels=12, kernel_size=3,stride=1,padding=1)
+        self.conv1 = nn.Conv2d(in_channels=1,out_channels=12, kernel_size=3,stride=1,padding=1)
             #shape= (64,12,200,200)
 
         self.bn1 = nn.BatchNorm2d(num_features=12)

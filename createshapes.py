@@ -1,9 +1,11 @@
 import cv2 
 import numpy as np 
 import os
-from os import listdir
+from os import listdir, makedirs
 from os.path import isfile, join
 import random
+import glob
+
 
 squarefilepath = '/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/new-square'
 hexafilepath = '/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/hexagon'
@@ -11,8 +13,6 @@ pentagonfilepath = '/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/p
 heptagonfilepath = '/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/heptagon'
 irregularfilepath = '/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/irregular'
 openfilepath = '/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/open'
-
-#TODO: make shape size 50 by 50 and create irregular and open shapes
 
 def generate_hexagon(angle):
     img = np.ones((200, 200, 3), dtype=np.uint8) * 255
@@ -83,14 +83,35 @@ def generate_open_shape(angle, x, y):
     shape = cv2.line(shape, tuple(rotated_vertices[4]), tuple(rotated_vertices[5]), (0, 0, 0), thickness=2)
     return shape
 
-for i in range(3600):
-    angle = random.uniform(0.0,360.0)
-    x = random.randint(20, 75)
-    shape = generate_square(angle, x)
-    filename = f"open{i}.png"
-    cv2.imwrite(os.path.join(openfilepath, filename), shape)
+# for i in range(3600):
+#     angle = random.uniform(0.0,360.0)
+#     x = random.randint(20, 75)
+#     shape = generate_pentagon(angle)
+#     filename = f"pentagon{i}.png"
+#     cv2.imwrite(os.path.join(pentagonfilepath, filename), shape)
 
-#TODO: Fix this function vertices are not being accurately created using trig try and find out how to utilize trig for the creation of the shapes
+
+path_hexagon='/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/hexagon/*.png'
+path_pentagon='/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/pentagon/*.png'
+path_heptagon='/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/heptagon/*.png'
+path_irregular='/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/irregular/*.png'
+path_open= '/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/open/*.png'
+paths_list = [path_open]
+count = 14400
+for path in paths_list:
+    filenames = glob.glob(path)
+    for filename in filenames:
+        image = cv2.imread(filename)
+        gray_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        filename = f"non-square{count}.png"
+        cv2.imwrite(os.path.join("/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/non-square", filename),gray_img)
+        count += 1
+
+#If you mess up use this
+# for filename in glob.glob("/Users/v.esau.hutcherson/codesrc/shapes/archive (4)/shapes/non-square/non-sqaure*"):
+#     os.remove(filename) 
+
+# # TODO: Fix this function vertices are not being accurately created using trig try and find out how to utilize trig for the creation of the shapes
 # def generate_hexagon(angle, x):
 #     img = np.ones((200, 200, 3), dtype=np.uint8) * 255
 #     vertices_center = int (img.shape[0]//2)
